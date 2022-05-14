@@ -1,3 +1,8 @@
+<!---
+Define your base template here, override parts of the base template with more specific templates for other pages.
+Use Jinja (templating language that works with Flask). Allows you to use Python in html. No need for javascript.
+    --->
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -14,10 +19,12 @@
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       crossorigin="anonymous"
     />
-    <title>{% block title %}Home{% endblock %}</title>
+    <title>{% block title %}Home{% endblock %}</title> 
+    <!--JINJA: Create a parent template here, value between block and endblock can be substituted inside child templates.-->
   </head>
 
   <body>
+    <!--define navbar class-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <button
         class="navbar-toggler"
@@ -37,18 +44,19 @@
       </div>
     </nav>
 
+    <!---flash messages handler here, take the defined categories and follow the logic below.--->
     {% with messages = get_flashed_messages(with_categories=true)%}
     {% if messages %}
         {% for category, message in messages %}
         {% if category == 'error' %}
-        <div class = "alert alert-danger alert-dismissable fade show" role = "alert">
+        <div class = "alert alert-danger alert-dismissable fade show" role = "alert"> <!--if error, show this type of alert (danger = red)-->
             {{ message }}
             <button type="button" class="close" data-dismiss="alert">
-                <span aria-hidden="true">&times;</span>
+                <span aria-hidden="true">&times;</span> <!--fancy 'x' for the button-->
             </button>
         </div>
         {% else %}
-        <div class = "alert alert-success alert-dismissable fade show" role = "alert">
+        <div class = "alert alert-success alert-dismissable fade show" role = "alert"> <!--if not error, show this type of alert (success = green)-->
             {{ message }}
             <button type="button" class="close" data-dismiss="alert">
                 <span aria-hidden="true">&times;</span>
@@ -60,10 +68,13 @@
     {% endwith %}
 
     <div class="container">
+    <!--page-specific content can be put here, generic space to be used.-->
     {% block content %}
     {% endblock %}
     </div>
 
+    <!--loads javascript from bootstrap needed to implement navbar design 
+      load at bottom of the body tag-->
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -79,10 +90,12 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
-<!-- 
+
+<!-- If you want to use your own image, javascript or css, place in 'static' folder, and use this jinja snippet:
     <script
       type="text/javascript"
-      src="{{ url_for('static', filename='index.js') }}"
+      src="{{ url_for('static', filename='index.js') }}"    ##url_for is a python expression
     ></script> -->
+  
   </body>
 </html>

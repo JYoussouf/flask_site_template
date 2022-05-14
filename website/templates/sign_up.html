@@ -1,6 +1,12 @@
+<!---
+sign_up page extension of base.html
+    --->
+
 {%extends "base.html"%} {% block title %}Sign Up{% endblock %}
 
 {% block content %}
+<!--In the content block of our base.html, place this user sign-up form with post inputs.-->
+<!--mehod="POST" will send a post request to the auth-->
 <form method="POST">
     <h3 align="center">Sign Up</h3>
     <div class="form-group">
