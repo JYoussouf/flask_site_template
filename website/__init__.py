@@ -3,7 +3,9 @@ Makes 'website' an importable package. Everything in __init__.py will automatica
 '''
 
 from flask import Flask
+from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
+from os import path #allows us to call os paths
 
 db = SQLAlchemy()
 DB_NAME = "database.db"
@@ -24,4 +26,21 @@ def create_app():
     app.register_blueprint(views,url_prefix='/') 
     app.register_blueprint(auth,url_prefix='/')
 
+    from .models import User, Note #import to define the classes in models.py
+
+    create_database(app)
+
+    login_manager = LoginManager()
+    login_manager.login_view = 'auth.login'
+    login_manager.init_app(app)
+
+    @login_manager.user_loader #tells flask how we're loading a user
+    def load_user(id):
+        return User.query.get(int(id)) #looks for primary key, int(id)
+        
     return app
+
+def create_database(app):
+    if not path.exists('website/' + DB_NAME):
+        db.create_all(app=app)
+        print('Created Database!')

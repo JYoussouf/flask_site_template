@@ -24,7 +24,7 @@ Use Jinja (templating language that works with Flask). Allows you to use Python 
   </head>
 
   <body>
-    <!--define navbar class-->
+    <!--NAVBAR-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <button
         class="navbar-toggler"
@@ -36,10 +36,14 @@ Use Jinja (templating language that works with Flask). Allows you to use Python 
       </button>
       <div class="collapse navbar-collapse" id="navbar">
         <div class="navbar-nav">
+          {% if user.is_authenticated %}
           <a class="nav-item nav-link" id="home" href="/">Home</a>
-          <a class="nav-item nav-link" id="sign_up" href="/sign-up">Sign Up</a>
-          <a class="nav-item nav-link" id="login" href="/login">Login</a>
           <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+          {% else %}
+          <a class="nav-item nav-link" id="login" href="/login">Login</a>
+          <a class="nav-item nav-link" id="sign_up" href="/sign-up">Sign Up</a>
+          {% endif %}
+         
         </div>
       </div>
     </nav>
@@ -91,11 +95,11 @@ Use Jinja (templating language that works with Flask). Allows you to use Python 
       crossorigin="anonymous"
     ></script>
 
-<!-- If you want to use your own image, javascript or css, place in 'static' folder, and use this jinja snippet:
+<!--If you want to use your own image, javascript or css, place in 'static' folder, and use this jinja snippet:-->
     <script
       type="text/javascript"
       src="{{ url_for('static', filename='index.js') }}"    ##url_for is a python expression
-    ></script> -->
+    ></script>
   
   </body>
 </html>

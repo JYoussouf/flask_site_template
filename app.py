@@ -2,7 +2,9 @@
 Call this file to start up the flask server
 '''
 
-############# Referencing https://www.youtube.com/watch?v=dam0GPOAvVI, Currently at 1:29:00
+############# Referencing https://www.youtube.com/watch?v=dam0GPOAvVI for flask website and security
+############# Referencing https://www.youtube.com/watch?v=hQl2wyJvK5k for substituting MySQL instead of SQLAlchemy
+
 
 from website import create_app #this works because we have an __init__ file in the website folder
 
