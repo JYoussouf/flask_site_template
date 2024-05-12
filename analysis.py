@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 import sqlite3
 import pandas as pd
-from website import db
+from website import DB_NAME
 
-conn = sqlite3.connect(db_file)
+conn = sqlite3.connect(DB_NAME)
