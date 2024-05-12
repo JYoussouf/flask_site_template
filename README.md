@@ -1,5 +1,7 @@
+
 Template Flask and Jinja site with a login, sign up, and placeholder notes application. Auth are credentials scrypt hashed.
 
+## Views
 _Template Log-in Page_
 ![image](https://github.com/JYoussouf/flask_site_template/assets/90774566/3eea26d1-592d-4be4-b0fa-2d404ee5fbaa)
 
